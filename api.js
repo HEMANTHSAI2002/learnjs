@@ -12,6 +12,10 @@ async function getdata(inputval){
 
 
 search_button.addEventListener("click", async()=>{
+    document.body.style.cursor='wait'
+    setTimeout(function(){
+document.body.style.cursor='default'
+    },1000)
     const value = await getdata(inputval.value)
     cityname.innerText=`${value.location.name}`
     cityregion.innerText=`${value.location.region}`
@@ -46,5 +50,9 @@ console.log("User did not allow")
 
 
 loc.addEventListener("click",()=>{
+    document.body.style.cursor = 'wait'
+    setTimeout(function(){
+        document.body.style.cursor='default'
+            },1000)
     navigator.geolocation.getCurrentPosition(gotlocation,failedtoget)
 })

@@ -4,6 +4,7 @@ div.container {
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
+    text-align: center;
 }
 
 /* Style for the input and button elements */

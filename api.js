@@ -12,16 +12,20 @@ async function getdata(inputval){
 
 
 search_button.addEventListener("click", async()=>{
-    document.body.style.cursor='wait'
-    setTimeout(function(){
-document.body.style.cursor='default'
-    },1000)
+    try{
+    search_button.style.cursor='wait'
     const value = await getdata(inputval.value)
     cityname.innerText=`${value.location.name}`
     cityregion.innerText=`${value.location.region}`
     citycountry.innerText =`${value.location.country}`
     temp.innerText=`Temperature:${value.current.temp_f}`
-    console.log(value)
+    }
+    catch(error){
+        console.log(error)
+    }
+    finally{
+        search_button.style.cursor='default'
+    }
 })
 
 
@@ -37,11 +41,20 @@ async function getcall(lat,lon){
 }
 
 async function gotlocation(position){
+    try{
+    loc.style.cursor = 'wait'
    const value = await getcall(position.coords.latitude,position.coords.longitude)
     cityname.innerText=`${value.location.name}`
     cityregion.innerText=`${value.location.region}`
     citycountry.innerText =`${value.location.country}`
     temp.innerText=`Temperature:${value.current.temp_f}`
+    }
+    catch(error){
+        console.log(error)
+    }
+    finally{
+        loc.style.cursor='default'
+    }
 }
 
 function failedtoget(){
@@ -50,9 +63,5 @@ console.log("User did not allow")
 
 
 loc.addEventListener("click",()=>{
-    document.body.style.cursor = 'wait'
-    setTimeout(function(){
-        document.body.style.cursor='default'
-            },1000)
     navigator.geolocation.getCurrentPosition(gotlocation,failedtoget)
 })
